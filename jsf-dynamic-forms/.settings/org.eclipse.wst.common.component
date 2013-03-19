@@ -6,6 +6,6 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <property name="java-output-path" value="/jsf-dynamic-forms/target/classes"/>
-        <property name="context-root" value="jsf-dynamic-forms"/>
+        <property name="context-root" value="test"/>
     </wb-module>
 </project-modules>

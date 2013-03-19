@@ -18,11 +18,12 @@
  */
 package foo;
 
-import javax.faces.component.UIComponent;
 import javax.faces.component.UIViewRoot;
+import javax.faces.component.html.HtmlForm;
 import javax.faces.component.html.HtmlInputText;
 import javax.faces.component.html.HtmlMessage;
 import javax.faces.component.html.HtmlOutputLabel;
+import javax.faces.component.html.HtmlOutputText;
 import javax.faces.component.html.HtmlPanelGrid;
 import javax.faces.context.FacesContext;
 
@@ -36,39 +37,79 @@ public class HelloWorldBacking
 
     //properties
     private String name;
+    private HtmlForm myForm = new HtmlForm();
 
     /**
      * default empty constructor
      */
     public HelloWorldBacking()
     {
-    	UIViewRoot viewRoot = FacesContext.getCurrentInstance().getViewRoot();
-    	HtmlPanelGrid hpg = (HtmlPanelGrid) viewRoot.findComponent("form:pippo");    
-    	
-    	if(hpg.getChildCount() == 0) {
-    	
-	    	// Col1
-	    	HtmlOutputLabel lab = new HtmlOutputLabel();
-	    	lab.setValue("Label");
-	    		
-	    	// Col2
-	    	HtmlInputText inp = new HtmlInputText();
-	    	inp.setValue("Initial value");
-	    	inp.setId("inp");
-	    	inp.setRequired(true);
-	    	
-	    	// Col3
-	    	HtmlMessage mes = new HtmlMessage();
-	    	mes.setFor(inp.getId());    	
-	    	lab.setFor(inp.getId());
-	    	
-	    	hpg.getChildren().add(lab);    	
-	    	hpg.getChildren().add(inp);
-	    	hpg.getChildren().add(mes);
-    	}
+//    	UIViewRoot viewRoot = FacesContext.getCurrentInstance().getViewRoot();
+//    	HtmlPanelGrid hpg = (HtmlPanelGrid) viewRoot.findComponent("form:pippo");    
+//    	
+//    	if(hpg!=null && hpg.getChildCount() == 0) {
+//    	
+//	    	// Col1
+//	    	HtmlOutputLabel lab = new HtmlOutputLabel();
+//	    	lab.setValue("Label");
+//	    		
+//	    	// Col2
+//	    	HtmlInputText inp = new HtmlInputText();
+//	    	inp.setValue("Initial value");
+//	    	inp.setId("inp");
+//	    	inp.setRequired(true);
+//	    	
+//	    	// Col3
+//	    	HtmlMessage mes = new HtmlMessage();
+//	    	mes.setFor(inp.getId());    	
+//	    	lab.setFor(inp.getId());
+//	    	
+//	    	hpg.getChildren().add(lab);    	
+//	    	hpg.getChildren().add(inp);
+//	    	hpg.getChildren().add(mes);
+//    	}
     }
 
-    //-------------------getter & setter
+	//-------------------getter & setter
+    
+    public HtmlForm getMyForm() {
+    	HtmlOutputText template1 = new HtmlOutputText();
+    	template1.setEscape(false);
+    	template1.setValue("<table id=\"pluto\" width=\"100%\" border=\"1\">" + 
+				"<tr>" + 
+					"<td>");
+    	myForm.getChildren().add(template1);
+    	
+    	// Col1
+    	HtmlOutputLabel lab = new HtmlOutputLabel();
+    	lab.setValue("Label");
+    	myForm.getChildren().add(lab);
+    	
+    	HtmlOutputText template2 = new HtmlOutputText();
+    	template2.setEscape(false);
+    	template2.setValue("</td><td>");
+    	myForm.getChildren().add(template2);
+    	
+    	// Col2
+    	HtmlInputText inp = new HtmlInputText();
+    	inp.setValue("Initial value");
+    	inp.setId("inp");
+    	inp.setRequired(true);
+    	myForm.getChildren().add(inp);
+    	
+    	HtmlOutputText template3 = new HtmlOutputText();
+    	template3.setEscape(false);
+    	template3.setValue("</td></tr>" +
+			"</table>");
+    	myForm.getChildren().add(template3);
+    	
+		return myForm;
+	}
+    
+    public void setMyForm(HtmlForm f) {
+    	
+    }
+    
     public String getName()
     {
         return name;
